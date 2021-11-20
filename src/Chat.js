@@ -34,23 +34,24 @@ const Chat = ({ messages }) => {
 
       <div className="chat__body">
         {messages.map((message) => {
-          <p className="chat__message">
-            <span className="chat__name">{message.name}</span>
-            {message.message}
-            <span className="chat__timestamp">{new Date().toUTCString()}</span>
-          </p>;
+          return (
+            <p
+              key={message.timestamp}
+              className={`chat__message ${
+                message.received && "chat__receiver"
+              } `}
+            >
+              <span className="chat__name">{message.name}</span>
+              {message.message}
+              <span className="chat__timestamp">
+                {new Date().toUTCString()}
+              </span>
+            </p>
+          );
         })}
-        <p className="chat__message chat__receiver">
-          <span className="chat__name">Lishu</span>
-          This is the message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Lishu</span>
-          This is the message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
       </div>
+
+      {/* footer  */}
       <div className="chat__footer">
         <InsertEmoticonOutlined />
         <form>

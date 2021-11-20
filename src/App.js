@@ -9,9 +9,10 @@ function App() {
   const [messages, setmessages] = useState([]);
   useEffect(() => {
     axios.get("/api/v1/message/").then((res) => {
-      console.log(res);
-      setmessages([res.data]);
+      console.log(res.data);
+      setmessages(res.data);
     });
+    console.log(messages);
   }, []);
   useEffect(() => {
     const pusher = new Pusher("2af785b0a0350dc54c48", {
@@ -20,7 +21,6 @@ function App() {
 
     const channel = pusher.subscribe("messages");
     channel.bind("inserted", function (newmessage) {
-      console.log(newmessage);
       setmessages([...messages, newmessage]);
     });
 
@@ -30,7 +30,6 @@ function App() {
     };
   }, [messages]);
 
-  console.log(messages);
   return (
     <div className="app">
       <div className="app__body">
