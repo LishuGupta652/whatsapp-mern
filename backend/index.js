@@ -28,6 +28,11 @@ const pusher = new Pusher({
 
 // Middleware
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Acess-Control-Allow-Origin", "*");
+  res.setHeader("Acess-Control-Allow-Headers", "*");
+  next();
+});
 
 // DB config
 mongoose.connect(process.env.MONGODB_URI, () => {
