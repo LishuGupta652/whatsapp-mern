@@ -9,7 +9,7 @@ import MoreVert from "@mui/icons-material/MoreVert";
 import { Avatar, IconButton } from "@mui/material";
 import React from "react";
 
-const Chat = () => {
+const Chat = ({ messages }) => {
   return (
     <div className="chat">
       <div className="chat__header">
@@ -33,11 +33,13 @@ const Chat = () => {
       </div>
 
       <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Lishu</span>
-          This is the message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((message) => {
+          <p className="chat__message">
+            <span className="chat__name">{message.name}</span>
+            {message.message}
+            <span className="chat__timestamp">{new Date().toUTCString()}</span>
+          </p>;
+        })}
         <p className="chat__message chat__receiver">
           <span className="chat__name">Lishu</span>
           This is the message

@@ -45,6 +45,7 @@ mongoose.connect(process.env.MONGODB_URI, () => {
         name: messageDetails.name,
         message: messageDetails.message,
         timestamp: messageDetails.timestamp,
+        received: messageDetails.received,
       });
     } else {
       console.log("Error triggering Pusher");

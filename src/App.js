@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     axios.get("/api/v1/message/").then((res) => {
       console.log(res);
-      setmessages(res.data);
+      setmessages([res.data]);
     });
   }, []);
   useEffect(() => {
@@ -19,17 +19,23 @@ function App() {
     });
 
     const channel = pusher.subscribe("messages");
-    channel.bind("inserted", function (data) {
-      alert(JSON.stringify(data));
+    channel.bind("inserted", function (newmessage) {
+      console.log(newmessage);
+      setmessages([...messages, newmessage]);
     });
-  }, []);
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  }, [messages]);
 
   console.log(messages);
   return (
     <div className="app">
       <div className="app__body">
         <Sidebar />
-        <Chat />
+        <Chat messages={messages} />
       </div>
     </div>
   );
