@@ -28,6 +28,7 @@ const pusher = new Pusher({
 // Middleware
 app.use(express.json());
 app.use(cors());
+
 // DB config
 mongoose.connect(process.env.MONGODB_URI, () => {
   console.log("Database Connencted");
@@ -43,6 +44,7 @@ mongoose.connect(process.env.MONGODB_URI, () => {
       pusher.trigger("messages", "inserted", {
         name: messageDetails.name,
         message: messageDetails.message,
+        timestamp: messageDetails.timestamp,
       });
     } else {
       console.log("Error triggering Pusher");
