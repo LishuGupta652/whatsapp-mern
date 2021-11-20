@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 8000;
 const pusher = new Pusher({
   appId: "1301032",
   key: process.env.PUSHER_KEY,
-  secret: "28b2dc113517ee30d892",
+  secret: process.env.PUSHER_SECRET,
   cluster: "ap2",
   useTLS: true,
 });
