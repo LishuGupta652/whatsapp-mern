@@ -12,7 +12,6 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 // pusher js (Realtime)
-
 const pusher = new Pusher({
   appId: "1301032",
   key: process.env.PUSHER_KEY,
